@@ -4,9 +4,7 @@ import com.nelioalves.cursomc.domain.enums.TipoCliente;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 
 @Entity
 public class Cliente implements Serializable {
@@ -15,13 +13,18 @@ public class Cliente implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
+
     private String nome;
     private String email;
     private String cpfOuCnpj;
-    private Integer tipo;
+    private TipoCliente tipo;
 
-    @OneToMany
+    @OneToMany(mappedBy = "cliente")
     private List<Endereco> enderecos = new ArrayList<>();
+
+    @ElementCollection
+    @CollectionTable(name = "TELEFONE")
+    private Set<String> telefone = new HashSet<>();
 
     public Cliente() {
 
@@ -32,7 +35,11 @@ public class Cliente implements Serializable {
         this.nome = nome;
         this.email = email;
         this.cpfOuCnpj = cpfOuCnpj;
-        this.tipo = tipo.getCod();
+        this.tipo = tipo;
+    }
+
+    public static long getSerialVersionUID() {
+        return serialVersionUID;
     }
 
     public Integer getId() {
@@ -68,20 +75,22 @@ public class Cliente implements Serializable {
     }
 
     public TipoCliente getTipo() {
-        return TipoCliente.toEnum(tipo);
+        return tipo;
     }
 
     public void setTipo(TipoCliente tipo) {
-        this.tipo = tipo.getCod();
+        this.tipo = tipo;
     }
 
-    public List<Endereco> getEnderecos() {
-        return enderecos;
+    public Set<String> getTelefone() {
+        return telefone;
     }
 
-    public void setEnderecos(List<Endereco> enderecos) {
-        this.enderecos = enderecos;
+    public void setTelefone(Set<String> telefone) {
+        this.telefone = telefone;
     }
+
+
 
     @Override
     public boolean equals(Object o) {
