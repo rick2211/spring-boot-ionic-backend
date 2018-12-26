@@ -1,6 +1,6 @@
 package br.com.ricardo.cursomc.services;
 
-import br.com.ricardo.cursomc.domain.Cliente;
+import br.com.ricardo.cursomc.domain.model.Cliente;
 import br.com.ricardo.cursomc.repositories.ClienteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

@@ -1,4 +1,4 @@
-package br.com.ricardo.cursomc.domain;
+package br.com.ricardo.cursomc.domain.model;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;

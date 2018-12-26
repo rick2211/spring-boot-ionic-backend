@@ -1,4 +1,4 @@
-package br.com.ricardo.cursomc.domain;
+package br.com.ricardo.cursomc.domain.model;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Data;

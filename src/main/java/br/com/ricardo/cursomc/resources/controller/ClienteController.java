@@ -1,6 +1,6 @@
 package br.com.ricardo.cursomc.resources.controller;
 
-import br.com.ricardo.cursomc.domain.Cliente;
+import br.com.ricardo.cursomc.domain.model.Cliente;
 import br.com.ricardo.cursomc.services.ClienteService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
