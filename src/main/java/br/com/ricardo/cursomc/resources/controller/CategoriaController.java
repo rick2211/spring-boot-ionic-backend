@@ -1,4 +1,4 @@
-package br.com.ricardo.cursomc.controller;
+package br.com.ricardo.cursomc.resources.controller;
 
 import br.com.ricardo.cursomc.domain.Categoria;
 import br.com.ricardo.cursomc.services.CategoriaService;

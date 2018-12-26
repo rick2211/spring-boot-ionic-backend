@@ -1,4 +1,4 @@
-package br.com.ricardo.cursomc.controller;
+package br.com.ricardo.cursomc.resources.exceptions;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
