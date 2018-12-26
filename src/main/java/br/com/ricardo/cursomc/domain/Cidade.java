@@ -5,27 +5,26 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
 
 @Data
-@NoArgsConstructor
 @Entity
-public class Categoria implements Serializable {
-    private static final long serialVersionUID = 1L;
+@NoArgsConstructor
+public class Cidade implements Serializable {
+    private static final long serialVersionUID = 1l;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-
-    @ManyToMany(mappedBy = "categorias")
-    private List<Produto> produtos = new ArrayList<>();
-
-    @Column
     private String nome;
 
-    public Categoria(Integer id, String nome) {
+    @ManyToOne
+    @JoinColumn(name = "estado_id")
+    private Estado estado;
+
+    public Cidade(Integer id, String nome, Estado estado) {
         this.id = id;
         this.nome = nome;
+        this.estado = estado;
     }
 }
+

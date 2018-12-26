@@ -9,22 +9,21 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Data
-@NoArgsConstructor
 @Entity
-public class Categoria implements Serializable {
-    private static final long serialVersionUID = 1L;
+@NoArgsConstructor
+public class Estado implements Serializable {
+
+    private static final long serialVersionUID = 1l;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-
-    @ManyToMany(mappedBy = "categorias")
-    private List<Produto> produtos = new ArrayList<>();
-
-    @Column
     private String nome;
 
-    public Categoria(Integer id, String nome) {
+    @OneToMany(mappedBy = "estado")
+    private List<Cidade> cidades = new ArrayList<>();
+
+    public Estado(Integer id, String nome) {
         this.id = id;
         this.nome = nome;
     }
