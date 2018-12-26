@@ -3,6 +3,7 @@ package br.com.ricardo.cursomc.domain.model;
 import br.com.ricardo.cursomc.domain.enums.TipoCliente;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
@@ -15,6 +16,7 @@ import java.util.Set;
 @Data
 @Entity
 @NoArgsConstructor
+@EqualsAndHashCode(of = "id")
 public class Cliente implements Serializable {
     private static final long serialVersionUID = 1l;
 

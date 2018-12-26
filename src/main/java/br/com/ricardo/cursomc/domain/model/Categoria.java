@@ -1,6 +1,7 @@
 package br.com.ricardo.cursomc.domain.model;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
@@ -11,6 +12,7 @@ import java.util.List;
 @Data
 @NoArgsConstructor
 @Entity
+@EqualsAndHashCode(of = "id")
 public class Categoria implements Serializable {
     private static final long serialVersionUID = 1L;
 

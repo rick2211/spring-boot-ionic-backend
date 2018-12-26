@@ -2,6 +2,7 @@ package br.com.ricardo.cursomc.domain.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
@@ -10,6 +11,7 @@ import java.io.Serializable;
 @Data
 @Entity
 @NoArgsConstructor
+@EqualsAndHashCode(of = "id")
 public class Endereco implements Serializable {
     private static final long serialVersionUID = 1l;
 
