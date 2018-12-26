@@ -1,6 +1,7 @@
 package br.com.ricardo.cursomc.domain.model;
 
 import br.com.ricardo.cursomc.domain.enums.EstadoPagamento;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
@@ -17,7 +18,6 @@ public abstract class Pagamento implements Serializable {
     private static final long serialVersionUID = 1l;
 
     @Id
-
     private Integer id;
 
     private Integer estadoPagamento;
@@ -25,6 +25,7 @@ public abstract class Pagamento implements Serializable {
     @OneToOne
     @JoinColumn(name = "pedido_id")
     @MapsId
+    @JsonBackReference
     private Pedido pedido;
 
 
