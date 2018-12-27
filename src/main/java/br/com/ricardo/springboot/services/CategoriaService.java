@@ -2,7 +2,10 @@ package br.com.ricardo.springboot.services;
 
 import br.com.ricardo.springboot.domain.model.Categoria;
 import br.com.ricardo.springboot.repositories.CategoriaRepository;
+import br.com.ricardo.springboot.services.exceptions.DataIntegrityException;
+import br.com.ricardo.springboot.services.exceptions.ObjetctNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
@@ -34,4 +37,14 @@ public class CategoriaService {
     }
 
 
+    public void delete(Integer id) {
+        find(id);
+        try {
+            categoriaRepository.deleteById(id);
+        } catch (DataIntegrityViolationException e) {
+
+            throw new DataIntegrityException("Não é possivel excluir Categoria que possui produtos");
+        }
+
+    }
 }

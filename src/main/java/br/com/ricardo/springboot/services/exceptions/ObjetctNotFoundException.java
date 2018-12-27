@@ -1,4 +1,4 @@
-package br.com.ricardo.springboot.services;
+package br.com.ricardo.springboot.services.exceptions;
 
 public class ObjetctNotFoundException extends RuntimeException {
     private static final long serialVersionUID = 1l;
