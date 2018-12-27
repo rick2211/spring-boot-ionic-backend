@@ -2,6 +2,7 @@ package br.com.ricardo.springboot.services;
 
 import br.com.ricardo.springboot.domain.model.Cliente;
 import br.com.ricardo.springboot.repositories.ClienteRepository;
+import br.com.ricardo.springboot.services.exceptions.ObjetctNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
