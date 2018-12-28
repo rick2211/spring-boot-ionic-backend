@@ -2,13 +2,16 @@ package br.com.ricardo.springboot.resources.controller;
 
 import br.com.ricardo.springboot.domain.model.Cliente;
 import br.com.ricardo.springboot.dto.ClienteDTO;
+import br.com.ricardo.springboot.dto.ClienteNewDTO;
 import br.com.ricardo.springboot.services.ClienteService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import javax.validation.Valid;
+import java.net.URI;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -19,6 +22,21 @@ public class ClienteController {
     @Autowired
     private ClienteService clienteService;
 
+
+    @PostMapping()
+    public ResponseEntity<Void> insert(@Valid @RequestBody ClienteNewDTO objDto) {
+
+        Cliente obj = clienteService.fromDTO(objDto);
+
+        obj = clienteService.insert(obj);
+
+        URI uri = ServletUriComponentsBuilder.fromCurrentRequest()
+
+                .path("/{id}").buildAndExpand(obj.getId()).toUri();
+
+        return ResponseEntity.created(uri).build();
+
+    }
     @GetMapping(value = "/{id}")
     public ResponseEntity<Cliente> find(@PathVariable Integer id) {
 
