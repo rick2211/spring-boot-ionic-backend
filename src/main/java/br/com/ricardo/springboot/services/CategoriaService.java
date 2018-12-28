@@ -1,6 +1,7 @@
 package br.com.ricardo.springboot.services;
 
 import br.com.ricardo.springboot.domain.model.Categoria;
+import br.com.ricardo.springboot.dto.CategoriaDTO;
 import br.com.ricardo.springboot.repositories.CategoriaRepository;
 import br.com.ricardo.springboot.services.exceptions.DataIntegrityException;
 import br.com.ricardo.springboot.services.exceptions.ObjetctNotFoundException;
@@ -61,5 +62,9 @@ public class CategoriaService {
     public Page<Categoria> findPage(Integer page, Integer linesPerPage, String orderBy, String direction) {
         PageRequest pageRequest = PageRequest.of(page, linesPerPage, Sort.Direction.valueOf(direction), orderBy);
         return categoriaRepository.findAll(pageRequest);
+    }
+
+    public Categoria fromDTO(CategoriaDTO objDto) {
+        return new Categoria(objDto.getId(), objDto.getNome());
     }
 }
