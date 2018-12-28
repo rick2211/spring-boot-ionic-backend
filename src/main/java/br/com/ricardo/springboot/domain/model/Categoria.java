@@ -1,5 +1,6 @@
 package br.com.ricardo.springboot.domain.model;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
@@ -11,6 +12,7 @@ import java.util.List;
 
 @Data
 @NoArgsConstructor
+@AllArgsConstructor
 @Entity
 @EqualsAndHashCode(of = "id")
 public class Categoria implements Serializable {

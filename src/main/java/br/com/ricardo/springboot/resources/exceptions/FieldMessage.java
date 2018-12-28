@@ -9,12 +9,9 @@ import java.io.Serializable;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class StandardError implements Serializable {
+public class FieldMessage implements Serializable {
     private static final long serialVersionUID = 1l;
 
-    private Integer status;
-    private String msg;
-    private Long timeStamp;
-
-
+    private String fieldName;
+    private String message;
 }
