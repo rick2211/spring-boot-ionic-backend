@@ -1,6 +1,7 @@
 package br.com.ricardo.springboot.dto;
 
 import br.com.ricardo.springboot.domain.model.Cliente;
+import br.com.ricardo.springboot.services.validation.ClienteUpdate;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.validator.constraints.Length;
@@ -9,6 +10,7 @@ import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 import java.io.Serializable;
 
+@ClienteUpdate
 @Data
 @NoArgsConstructor
 public class ClienteDTO implements Serializable {
