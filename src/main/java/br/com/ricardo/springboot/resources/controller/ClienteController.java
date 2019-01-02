@@ -23,7 +23,7 @@ public class ClienteController {
     private ClienteService clienteService;
 
 
-    @PostMapping()
+    @PostMapping
     public ResponseEntity<Void> insert(@Valid @RequestBody ClienteNewDTO objDto) {
 
         Cliente obj = clienteService.fromDTO(objDto);
