@@ -1,6 +1,7 @@
 package br.com.ricardo.springboot.domain.model;
 
 import br.com.ricardo.springboot.domain.enums.EstadoPagamento;
+import com.fasterxml.jackson.annotation.JsonTypeName;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -9,6 +10,7 @@ import javax.persistence.Entity;
 @Data
 @NoArgsConstructor
 @Entity
+@JsonTypeName("pagamentoComCartao")
 public class PagamentoComCartao extends Pagamento {
     private static final long serialVersionUID = 1l;
 
