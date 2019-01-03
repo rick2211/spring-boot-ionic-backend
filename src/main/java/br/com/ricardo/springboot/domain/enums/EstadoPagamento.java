@@ -16,7 +16,7 @@ public enum EstadoPagamento {
     private int cod;
     @Getter
     @Setter
-    private String descriçao;
+    private String descricao;
 
     public static EstadoPagamento toEnum(Integer cod) {
         if (cod == null) {
