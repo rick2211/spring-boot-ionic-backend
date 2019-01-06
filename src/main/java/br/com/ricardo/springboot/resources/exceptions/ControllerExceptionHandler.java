@@ -2,6 +2,7 @@ package br.com.ricardo.springboot.resources.exceptions;
 
 import br.com.ricardo.springboot.services.exceptions.DataIntegrityException;
 import br.com.ricardo.springboot.services.exceptions.ObjetctNotFoundException;
+import com.amazonaws.services.licensemanager.model.AuthorizationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.FieldError;
@@ -37,5 +38,12 @@ public class ControllerExceptionHandler {
 
         }
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(err);
+    }
+
+    @ExceptionHandler(AuthorizationException.class)
+    public ResponseEntity<StandardError> authorization(AuthorizationException e, HttpServletRequest request) {
+
+        StandardError err = new StandardError(HttpStatus.FORBIDDEN.value(), e.getMessage(), System.currentTimeMillis());
+        return ResponseEntity.status(HttpStatus.FORBIDDEN).body(err);
     }
 }
