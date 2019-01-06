@@ -1,5 +1,6 @@
 package br.com.ricardo.springboot.services;
 
+import br.com.ricardo.springboot.domain.enums.Perfil;
 import br.com.ricardo.springboot.domain.enums.TipoCliente;
 import br.com.ricardo.springboot.domain.model.Cidade;
 import br.com.ricardo.springboot.domain.model.Cliente;
@@ -8,8 +9,10 @@ import br.com.ricardo.springboot.dto.ClienteDTO;
 import br.com.ricardo.springboot.dto.ClienteNewDTO;
 import br.com.ricardo.springboot.repositories.ClienteRepository;
 import br.com.ricardo.springboot.repositories.EnderecoRepository;
+import br.com.ricardo.springboot.security.UserSS;
+import br.com.ricardo.springboot.services.exceptions.AuthorizationException;
 import br.com.ricardo.springboot.services.exceptions.DataIntegrityException;
-import br.com.ricardo.springboot.services.exceptions.ObjetctNotFoundException;
+import br.com.ricardo.springboot.services.exceptions.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.data.domain.Page;
@@ -33,12 +36,17 @@ public class ClienteService {
     private BCryptPasswordEncoder bCryptPasswordEncoder;
 
     public Cliente find(Integer id) {
-        Optional<Cliente> obj = clienteRepository.findById(id);
 
-        return obj.orElseThrow(() -> new ObjetctNotFoundException("Objeto não encontrado! Id:"
-                + id
-                + ", Tipo: " + Cliente.class.getName()));
+        UserSS user = UserService.authenticated();
+        if (user == null || !user.hasRole(Perfil.ADMIN) && !id.equals(user.getId())) {
+            throw new AuthorizationException("Acesso negado");
+        }
+
+        Optional<Cliente> obj = clienteRepository.findById(id);
+        return obj.orElseThrow(() -> new ObjectNotFoundException(
+                "Objeto não encontrado! Id: " + id + ", Tipo: " + Cliente.class.getName()));
     }
+
 
     @Transactional
     public Cliente insert(Cliente obj) {

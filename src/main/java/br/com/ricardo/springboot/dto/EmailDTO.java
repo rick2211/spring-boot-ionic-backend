@@ -1,9 +1,14 @@
 package br.com.ricardo.springboot.dto;
 
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 import java.io.Serializable;
 
+@Data
+@NoArgsConstructor
 public class EmailDTO implements Serializable {
     private static final long serialVersionUID = 1L;
 
@@ -11,14 +16,5 @@ public class EmailDTO implements Serializable {
     @Email(message="Email inválido")
     private String email;
 
-    public EmailDTO() {
-    }
 
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
 }

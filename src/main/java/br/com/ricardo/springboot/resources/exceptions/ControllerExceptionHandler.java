@@ -1,8 +1,8 @@
 package br.com.ricardo.springboot.resources.exceptions;
 
+import br.com.ricardo.springboot.services.exceptions.AuthorizationException;
 import br.com.ricardo.springboot.services.exceptions.DataIntegrityException;
-import br.com.ricardo.springboot.services.exceptions.ObjetctNotFoundException;
-import com.amazonaws.services.licensemanager.model.AuthorizationException;
+import br.com.ricardo.springboot.services.exceptions.ObjectNotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.FieldError;
@@ -15,8 +15,8 @@ import javax.servlet.http.HttpServletRequest;
 @ControllerAdvice
 public class ControllerExceptionHandler {
 
-    @ExceptionHandler(ObjetctNotFoundException.class)
-    public ResponseEntity<StandardError> objectNotFound(ObjetctNotFoundException e, HttpServletRequest request) {
+    @ExceptionHandler(ObjectNotFoundException.class)
+    public ResponseEntity<StandardError> objectNotFound(ObjectNotFoundException e, HttpServletRequest request) {
         StandardError err = new StandardError(HttpStatus.NOT_FOUND.value(), e.getMessage(), System.currentTimeMillis());
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(err);
     }
@@ -40,7 +40,8 @@ public class ControllerExceptionHandler {
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(err);
     }
 
-    @ExceptionHandler(AuthorizationException.class)
+    @ExceptionHandler(AuthorizationException.class
+    )
     public ResponseEntity<StandardError> authorization(AuthorizationException e, HttpServletRequest request) {
 
         StandardError err = new StandardError(HttpStatus.FORBIDDEN.value(), e.getMessage(), System.currentTimeMillis());

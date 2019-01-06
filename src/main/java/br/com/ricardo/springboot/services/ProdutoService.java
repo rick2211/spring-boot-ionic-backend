@@ -5,7 +5,7 @@ import br.com.ricardo.springboot.domain.model.Pedido;
 import br.com.ricardo.springboot.domain.model.Produto;
 import br.com.ricardo.springboot.repositories.CategoriaRepository;
 import br.com.ricardo.springboot.repositories.ProdutoRepository;
-import br.com.ricardo.springboot.services.exceptions.ObjetctNotFoundException;
+import br.com.ricardo.springboot.services.exceptions.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -26,7 +26,7 @@ public class ProdutoService {
     public Produto find(Integer id) {
         Optional<Produto> obj = produtoRepository.findById(id);
 
-        return obj.orElseThrow(() -> new ObjetctNotFoundException("Objeto não encontrado! Id:"
+        return obj.orElseThrow(() -> new ObjectNotFoundException("Objeto não encontrado! Id:"
                 + id
                 + ", Tipo: " + Pedido.class.getName()));
     }

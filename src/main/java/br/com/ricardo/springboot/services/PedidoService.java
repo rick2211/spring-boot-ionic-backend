@@ -1,14 +1,20 @@
 package br.com.ricardo.springboot.services;
 
 import br.com.ricardo.springboot.domain.enums.EstadoPagamento;
+import br.com.ricardo.springboot.domain.model.Cliente;
 import br.com.ricardo.springboot.domain.model.ItemPedido;
 import br.com.ricardo.springboot.domain.model.PagamentoComBoleto;
 import br.com.ricardo.springboot.domain.model.Pedido;
 import br.com.ricardo.springboot.repositories.ItemPedidoRepository;
 import br.com.ricardo.springboot.repositories.PagamentoRepository;
 import br.com.ricardo.springboot.repositories.PedidoRepository;
-import br.com.ricardo.springboot.services.exceptions.ObjetctNotFoundException;
+import br.com.ricardo.springboot.security.UserSS;
+import br.com.ricardo.springboot.services.exceptions.AuthorizationException;
+import br.com.ricardo.springboot.services.exceptions.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -37,7 +43,7 @@ public class PedidoService {
     public Pedido find(Integer id) {
         Optional<Pedido> obj = pedidoRepository.findById(id);
 
-        return obj.orElseThrow(() -> new ObjetctNotFoundException("Objeto não encontrado! Id:"
+        return obj.orElseThrow(() -> new ObjectNotFoundException("Objeto não encontrado! Id:"
                 + id
                 + ", Tipo: " + Pedido.class.getName()));
     }
@@ -75,5 +81,15 @@ public class PedidoService {
         emailService.sendOrderConfirmationEmail(obj);
         return obj;
 
+    }
+
+    public Page<Pedido> findPage(Integer page, Integer linesPerPage, String orderBy, String direction) {
+        UserSS user = UserService.authenticated();
+        if (user == null) {
+            throw new AuthorizationException("Acesso negado");
+        }
+        PageRequest pageRequest = PageRequest.of(page, linesPerPage, Sort.Direction.valueOf(direction), orderBy);
+        Cliente cliente =  clienteService.find(user.getId());
+        return pedidoRepository.findByCliente(cliente, pageRequest);
     }
 }
